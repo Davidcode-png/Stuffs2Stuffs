@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import pdftodocx,docxtopdf
+from .views import pdftodocx,docxtopdf,pdftojpg,docxtojpg,imgtopdf 
 
 urlpatterns = [
-    path("",docxtopdf,name='index')
+    path("",imgtopdf,name='index')
 ]
