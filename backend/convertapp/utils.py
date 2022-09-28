@@ -8,10 +8,13 @@ import fitz
 from PIL import Image
 import img2pdf
 
-def helper_pdftoword(form):
-    file_path = form.file.path
+def helper_pdftoword(file_instance):
+    try:
+        file_path = file_instance.file.path
+    except:
+        file_path = os.path.abspath(file_instance) 
     file_dir = os.path.dirname(file_path)
-    file = open(form.file.path)
+    file = open(file_path)
     cv = Converter(file)
     cv.convert(f'{file_dir}\OutputTest2.docx')
 
@@ -75,7 +78,10 @@ def helper_pdftojpg(file_instance):
 
 
 def helper_imgtopdf(file_instance):
-    file_path = file_instance.file.path
+    try:
+        file_path = file_instance.file.path
+    except:
+        file_path = os.path.abspath(file_instance) 
     file_dir = os.path.dirname(file_path)
     pdf_path = f"{file_dir}/Output.pdf"
     # opening image
@@ -95,4 +101,4 @@ def helper_imgtopdf(file_instance):
 
     new_file = open(pdf_path,"rb")
 
-    return new_file
+    return new_file,pdf_path

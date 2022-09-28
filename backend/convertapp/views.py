@@ -4,6 +4,9 @@ from .forms import FileForm
 from .utils import helper_imgtopdf, helper_pdftoword,helper_pdftojpg ,helper_wordtopdf
 
 
+def index(request):
+    return render(request,'convertapp/home.html')
+
 def pdftodocx(request):
     form  = FileForm()
     if request.method == 'POST':
@@ -90,5 +93,24 @@ def imgtopdf(request):
             response = HttpResponse(pdf,content_type='application/pdf')
             return response
 
+    context = {'form':form}
+    return render(request,'convertapp/index.html',context)
+
+
+def imgtoword(request):
+    form = FileForm()
+    if request.method == 'POST':
+        form = FileForm(request.POST,request.FILES)
+        if form.is_valid():
+            file_instance = form.save()
+            pdf,pdf_path = helper_imgtopdf(file_instance)
+            document,path = helper_pdftoword(pdf_path)
+
+            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+            response['Content-Disposition'] = f'attachment; filename = "download.docx"'
+            document.save(response)
+            return response
+    
+    
     context = {'form':form}
     return render(request,'convertapp/index.html',context)
