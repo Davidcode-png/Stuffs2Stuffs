@@ -1,13 +1,17 @@
 import os
 from django.shortcuts import render,HttpResponse
 from .forms import FileForm
+from .models import File
 from .utils import helper_imgtopdf, helper_pdftoword,helper_pdftojpg ,helper_wordtopdf
 
 
 def index(request):
+    File.objects.all().delete()
     return render(request,'convertapp/home.html')
 
 def pdftodocx(request):
+    source = 'PDF'
+    converted = 'Word'
     form  = FileForm()
     if request.method == 'POST':
         form = FileForm(request.POST,request.FILES)
@@ -16,22 +20,24 @@ def pdftodocx(request):
             document,path = helper_pdftoword(file)
             
             response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-            response['Content-Disposition'] = f'attachment; filename = "{form.name}.docx"'
+            response['Content-Disposition'] = f'attachment; filename = "Output.docx"'
             document.save(response)
             return response
                     
-    context = {'form':form}
+    context = {'form':form,'source':source,'converted':converted}
 
     return render(request,'convertapp/index.html',context)
 
 
 def docxtopdf(request):
+    source = 'Word'
+    converted = 'PDF'
     form = FileForm()
     if request.method == 'POST':
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file_instance = form.save()
-            pdf = helper_wordtopdf(file_instance)
+            pdf,pdf_path = helper_wordtopdf(file_instance)
             
             response = HttpResponse(pdf.read(),content_type='application/pdf')
             response['Content-Disposition'] = 'inline;filename=download.pdf'
@@ -39,13 +45,15 @@ def docxtopdf(request):
             
 
     
-    context = {'form':form}
+    context = {'form':form,'source':source,'converted':converted}
     
     return render(request, 'convertapp/index.html',context)
 
 
 
 def pdftojpg(request):
+    source = 'PDF'
+    converted = 'Image'
     form = FileForm()
     if request.method == 'POST':
         form = FileForm(request.POST,request.FILES)
@@ -56,7 +64,7 @@ def pdftojpg(request):
             response = HttpResponse(image.read(),content_type='image/tiff')
             return response
                
-    context = {'form':form}
+    context = {'form':form,'source':source,'converted':converted}
     return render(request, 'convertapp/index.html',context)
 
 
@@ -66,6 +74,8 @@ def docxtojpg(request):
     Step 1 -> Converts Word -> PDF
     Step 2 -> Converts PDF -> JPG/tiff
     """
+    source = 'Word'
+    converted = 'Image'
     form = FileForm()
     if request.method == 'POST':
         form = FileForm(request.POST,request.FILES)
@@ -79,25 +89,29 @@ def docxtojpg(request):
             response = HttpResponse(image.read(),content_type='image/tiff')
             return response
 
-    context = {'form':form}
+    context = {'form':form,'source':source,'converted':converted}
     return render(request, 'convertapp/index.html',context)
 
 
 def imgtopdf(request):
+    source = 'Image'
+    converted = 'PDF'
     form = FileForm()
     if request.method == 'POST':
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file_instance = form.save()
-            pdf = helper_imgtopdf(file_instance)
+            pdf,pdf_path = helper_imgtopdf(file_instance)
             response = HttpResponse(pdf,content_type='application/pdf')
             return response
 
-    context = {'form':form}
+    context = {'form':form,'source':source,'converted':converted}
     return render(request,'convertapp/index.html',context)
 
 
 def imgtoword(request):
+    source = 'Image'
+    converted = 'Word'
     form = FileForm()
     if request.method == 'POST':
         form = FileForm(request.POST,request.FILES)
@@ -112,5 +126,5 @@ def imgtoword(request):
             return response
     
     
-    context = {'form':form}
+    context = {'form':form,'source':source,'converted':converted}
     return render(request,'convertapp/index.html',context)

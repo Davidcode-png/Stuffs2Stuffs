@@ -1,10 +1,20 @@
-from django.db import models
 import os
+import datetime
+from django.db import models
+from django.utils import timezone
+from .managers import FileManager
 
 class File(models.Model):
     file = models.FileField(upload_to='uploads')
     name = models.CharField(max_length=200,blank=True)
     extension = models.CharField(max_length=150,blank=True)
+    upload_date = models.DateTimeField(
+    default=timezone.now,
+    blank=True,
+    )
+    # objects = FileManager()
+    
+
 
     def filename(self):
         return os.path.basename(self.file.name)
@@ -22,7 +32,8 @@ class File(models.Model):
             self.extension = self.get_extension()
 
         super(File,self).save(*args,**kwargs)
-
+    
+   
 
     def __str__(self) -> str:
         return self.name

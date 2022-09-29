@@ -1,19 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Converter</title>
-</head>
-<body>
-    <h1>Hiii everyone</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+{% extends 'convertapp/main.html' %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand navbar-dark bg-secondary">
+    <div class="col-6 col-xl-2 mx-4">
+        <h1 class="mb-0 site-logo"><a href="{% url 'index' %}"><img class="brandImg" src="{% static 'image/brandImg.jpg' %}" alt=""><span class="text-primary">Stuffs.</span> </a></h1>
+      </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        {{form}}
-            <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <h2>Convert {{source}} to {{converted}}</h2>
+        </li>
+      </ul>
+    </div>
+  </nav>
+    <br>
+    <br>
+    <div class='container'>
+        <form method="POST" enctype="multipart/form-data" >
+                <div class="form-group">
+                {% csrf_token %}
+
+                
+                <div class="m-2 px-3 text-center">
+                    <label for="file" class="form-label">Default file input example</label>
+                    {{form}}
+                </div>
+                <div class="m-2 py-3 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>                
+            </div>
+        </form>
         </div>
-    </form>
-</body>
-</html>
+        
+    </div>
+{% endblock content %}
