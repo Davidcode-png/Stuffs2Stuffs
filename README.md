@@ -1,9 +1,9 @@
 # Stuffs2Stuffs
-##Convert Stuffs to well...... Stuffs.
+## Convert Stuffs to well...... Stuffs.
 
-###Hi guys this is a file converter that converts different file types to other file types
+### Hi guys this is a file converter that converts different file types to other file types
 
-##Current file-conversion operations are:
+##  Current file-conversion operations are:
 PDF -> Word
 Word -> PDF
 PDF -> JPG
