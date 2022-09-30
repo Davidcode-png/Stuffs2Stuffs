@@ -25,30 +25,10 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="#home-section" class="nav-link">Home</a></li>
-                <li class="has-children">
-                  <a href="#about-section" class="nav-link">About Us</a>
-                  <ul class="dropdown">
-                    <li><a href="#team-section" class="nav-link">Team</a></li>
-                    <li><a href="#pricing-section" class="nav-link">Pricing</a></li>
-                    <li><a href="#faq-section" class="nav-link">FAQ</a></li>
-                    <li><a href="#gallery-section" class="nav-link">Gallery</a></li>
-                    <li><a href="#services-section" class="nav-link">Services</a></li>
-                    <li><a href="#testimonials-section" class="nav-link">Testimonials</a></li>
-                    <li class="has-children">
-                      <a href="#">More Links</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
                 
                 
-                <li><a href="#blog-section" class="nav-link">Blog</a></li>
-                <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                <li><a href="https://sitblog.herokuapp.com/" class="nav-link">Blog</a></li>
+                <li><a href="https://sitblog.herokuapp.com/contact/" class="nav-link">Contact</a></li>
                 <li class="social"><a href="https://github.com/Davidcode-png" class="nav-link"><span class="icon-github"></span></a></li>
                 <li class="social"><a href="https://www.linkedin.com/in/opeoluwa-ojewale-9921a0207/" class="nav-link"><span class="icon-linkedin"></span></a></li>
               </ul>
@@ -63,7 +43,6 @@
       
     </header>
 
-    {% comment %} <div class="hero"></div> {% endcomment %}
     <section>
       <br />
       <br />
@@ -71,45 +50,68 @@
       <br />
       <br />
 
-        <h1 class='display-1'>Convert Stuffs to Stuffs</h1>
+        <h1 class='display-1 mx-2'>Convert Stuffs to Stuffs</h1>
         <br />
-
-        <div class ='container-fluid main-section text-center'>
-          <div class='row'>
-            <div class='col-3 col-sm-6'>
-              <img src="{% static 'fileimg/pdftoword.svg' %}" alt="">
-              <h3>Convert pdf to word --- <a href="{% url 'ptd' %}">Here</a> </h3>
-              <br />
-            </div>
-            <div class='col-3 col-sm-6'>
-              <img src="{% static 'fileimg/pdftoimg.svg' %}" alt="">
-              <h3>Convert pdf to image --- <a href="{% url 'pti' %}">Here</a> </h3>
-            <br />
-            </div>
-            <div class= 'col-3 col-sm-6'>
-            <img src="{% static 'fileimg/wordtopdf.svg' %}" alt="">
-            <h3>Convert word to pdf --- <a href="{% url 'dtp' %}">Here</a> </h3>
-            <br />
-            </div>
-            <div class="w-100"></div>
-
-            <div class='col-3'>
-            <img src="{% static 'fileimg/wordtoimg.svg' %}" alt="">
-            <h3>Convert word to image --- <a href="{% url 'dti' %}">Here</a> </h3>
-            <br />
-            </div>
-            <div class='col-3'>
-              <img src="{% static 'fileimg/imgtoword.svg' %}" alt="">
-            <h3>Convert image to word --- <a href="{% url 'itd' %}">Here</a> </h3>
-            <br />
-            </div>
-            <div class='col-3'>
-              <img src="{% static 'fileimg/imgtopdf.svg' %}" alt="">
-
-            <h3>Convert image to pdf --- <a href="{% url 'itp' %}">Here</a> </h3>
-            </div>
-          </div>
-        </div> 
         
+        <div class="container mt-5">
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="card p-3">
+                      <div class="d-flex flex-row mb-3"><img src="{% static 'fileimg/pdftoword.svg' %}" width="70">
+                          <div class="d-flex flex-column ml-2"><span>PDF</span><span class="text-black-50">to Word</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                      </div>
+                      <h6>Convert your PDF files to Word</h6>
+                      <div class="d-flex justify-content-between install mt-3"><span></span> <a href="{% url 'ptd' %}"> <span class="text-primary">View&nbsp;<i class="fa fa-angle-right"></i></span></a></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card p-3">
+                      <div class="d-flex flex-row mb-3"><img src="{% static 'fileimg/wordtoimg.svg' %}" width="70">
+                          <div class="d-flex flex-column ml-2"><span>Word</span><span class="text-black-50">to JPG</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                      </div>
+                      <h6>Convert your Word Documents to Images.</h6>
+                      <div class="d-flex justify-content-between install mt-3"><span></span> <a href="{% url 'dti' %}"> <span class="text-primary">View&nbsp;<i class="fa fa-angle-right"></i></span></a></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card p-3">
+                      <div class="d-flex flex-row mb-3"><img src="{% static 'fileimg/pdftoimg.svg' %}" width="70">
+                          <div class="d-flex flex-column ml-2"><span>PDF</span><span class="text-black-50">to JPG</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                      </div>
+                      <h6>Convert your PDF files to Images</h6>
+                      <div class="d-flex justify-content-between install mt-3"><span></span> <a href="{% url 'pti' %}"> <span class="text-primary">View&nbsp;<i class="fa fa-angle-right"></i></span></a></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card p-3">
+                      <div class="d-flex flex-row mb-3"><img src="{% static 'fileimg/wordtopdf.svg' %}" width="70">
+                          <div class="d-flex flex-column ml-2"><span>Word</span><span class="text-black-50">to PDF</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                      </div>
+                      <h6>Convert your Word documents into PDF</h6>
+                      <div class="d-flex justify-content-between install mt-3"><span></span> <a href="{% url 'dtp' %}"> <span class="text-primary">View&nbsp;<i class="fa fa-angle-right"></i></span></a></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card p-3">
+                      <div class="d-flex flex-row mb-3"><img src="{% static 'fileimg/imgtoword.svg' %}" width="70">
+                          <div class="d-flex flex-column ml-2"><span>JPG</span><span class="text-black-50">to Word</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                      </div>
+                      <h6>Convert your Images to Word Documents</h6>
+                      <div class="d-flex justify-content-between install mt-3"><span></span><a href="{% url 'itd' %}"><span class="text-primary">View&nbsp;<i class="fa fa-angle-right"></i></span></a></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card p-3">
+                      <div class="d-flex flex-row mb-3"><img src="{% static 'fileimg/imgtopdf.svg' %}" width="70">
+                          <div class="d-flex flex-column ml-2"><span>JPG</span><span class="text-black-50">to PDF</span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                      </div>
+                      <h6>Convert your Images to PDF</h6>
+                      <div class="d-flex justify-content-between install mt-3"><span></span><a href="{% url 'itp' %}"><span class="text-primary">View&nbsp;<i class="fa fa-angle-right"></i></span></a></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+        
+
     </section>
     {% endblock content %}

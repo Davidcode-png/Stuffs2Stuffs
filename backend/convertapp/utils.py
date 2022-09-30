@@ -102,3 +102,8 @@ def helper_imgtopdf(file_instance):
     new_file = open(pdf_path,"rb")
 
     return new_file,pdf_path
+
+
+def helper_check_file_extension(file_instance,extension):
+    if file_instance.extension != extension:
+        return HttpResponse("Invalid File Extension")

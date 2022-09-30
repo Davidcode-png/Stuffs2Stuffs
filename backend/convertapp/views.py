@@ -17,6 +17,8 @@ def pdftodocx(request):
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file = form.save()
+            if file.extension != '.pdf':
+                return render(request,'convertapp/errorfiletype.html')
             document,path = helper_pdftoword(file)
             
             response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
@@ -37,6 +39,9 @@ def docxtopdf(request):
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file_instance = form.save()
+            if file_instance.extension != '.docx':
+                return render(request,'convertapp/errorfiletype.html')
+
             pdf,pdf_path = helper_wordtopdf(file_instance)
             
             response = HttpResponse(pdf.read(),content_type='application/pdf')
@@ -59,6 +64,9 @@ def pdftojpg(request):
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file_instance = form.save()
+            if file_instance.extension != '.pdf':
+                return render(request,'convertapp/errorfiletype.html')
+
             image,instance = helper_pdftojpg(file_instance)
 
             response = HttpResponse(image.read(),content_type='image/tiff')
@@ -81,6 +89,8 @@ def docxtojpg(request):
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file_instance = form.save()
+            if file_instance.extension != '.docx':
+                return render(request,'convertapp/errorfiletype.html')
             
             # Step 1
             pdf,instance = helper_wordtopdf(file_instance)
@@ -101,6 +111,9 @@ def imgtopdf(request):
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file_instance = form.save()
+            if file_instance.extension != '.jpg' or file_instance.extension != '.png':
+                return render(request,'convertapp/errorfiletype.html')
+
             pdf,pdf_path = helper_imgtopdf(file_instance)
             response = HttpResponse(pdf,content_type='application/pdf')
             return response
@@ -117,6 +130,9 @@ def imgtoword(request):
         form = FileForm(request.POST,request.FILES)
         if form.is_valid():
             file_instance = form.save()
+            if file_instance.extension != '.jpg' or file_instance.extension != '.png':
+                return render(request,'convertapp/errorfiletype.html')
+
             pdf,pdf_path = helper_imgtopdf(file_instance)
             document,path = helper_pdftoword(pdf_path)
 
