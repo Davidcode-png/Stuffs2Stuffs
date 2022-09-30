@@ -10,3 +10,6 @@
 * Word -> JPG
 * JPG -> Word
 * JPG -> PDF
+
+
+## Currently working on excel and PDF compression 
